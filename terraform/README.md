@@ -4,6 +4,8 @@
 
 - Kubernetes Engine API
 - Secret Manager API
+- Cloud SQL Admin API
+- Cloud Resource Manager API
 
 ### Enabling the API
 
@@ -13,6 +15,12 @@ $ gcloud services enable \
 
 $ gcloud services enable \
     secretmanager.googleapis.com
+
+$ gcloud services enable \
+    sqladmin.googleapis.com
+
+$ gcloud services enable \
+    cloudresourcemanager.googleapis.com
 ```
 
 ## Google Cloud Service Accounts

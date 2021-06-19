@@ -1,4 +1,9 @@
-resource "google_service_account" "default" {
-  account_id   = "service-account-id"
-  display_name = "Service Account"
+resource "google_service_account" "gke_node_pool" {
+  account_id   = "gke-node-pool"
+  display_name = "gke-node-pool"
+}
+
+resource "google_service_account" "sql_proxy" {
+  account_id   = "sql-proxy"
+  display_name = "sql-proxy"
 }

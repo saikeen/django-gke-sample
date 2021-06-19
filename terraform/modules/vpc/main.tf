@@ -1,5 +1,9 @@
+locals {
+  env_resource_prefix = "${var.app_name}-${var.env}"
+}
+
 resource "google_compute_subnetwork" "custom" {
-  name          = "test-subnetwork"
+  name          = "${local.env_resource_prefix}-subnet"
   ip_cidr_range = "10.2.0.0/16"
   region        = var.region
   network       = google_compute_network.custom.id
@@ -15,6 +19,6 @@ resource "google_compute_subnetwork" "custom" {
 }
 
 resource "google_compute_network" "custom" {
-  name                    = "test-network"
+  name                    = "${local.env_resource_prefix}-vpc"
   auto_create_subnetworks = false
 }
