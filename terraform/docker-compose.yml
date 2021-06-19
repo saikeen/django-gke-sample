@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  terraform:
+    build: .
+    volumes:
+      - ./:/terraform
+    working_dir: /terraform/environments
+    entrypoint: sh
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: ${GOOGLE_APPLICATION_CREDENTIALS}
