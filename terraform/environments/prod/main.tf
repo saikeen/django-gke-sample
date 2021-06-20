@@ -8,6 +8,11 @@ module "iam" {
   sql_proxy_sa_email     = module.sa.sql_proxy_sa_email
 }
 
+module "secret" {
+  source                   = "../../modules/secret"
+  sql_proxy_sa_private_key = module.sa.sql_proxy_sa_private_key
+}
+
 module "vpc" {
   source   = "../../modules/vpc"
   region   = var.region

@@ -7,3 +7,7 @@ resource "google_service_account" "sql_proxy" {
   account_id   = "sql-proxy"
   display_name = "sql-proxy"
 }
+
+resource "google_service_account_key" "sql_proxy" {
+  service_account_id = google_service_account.sql_proxy.name
+}
