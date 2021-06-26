@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Copyright 2015 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,12 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import sys
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "testproject.settings")
+from django.contrib import admin
+from django.urls import include, path
 
-    from django.core.management import execute_from_command_line
+from apiapp.urls import router as apiapp_router
 
-    execute_from_command_line(sys.argv)
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include(apiapp_router.urls)),
+]
+
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
