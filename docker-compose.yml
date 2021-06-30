@@ -12,33 +12,17 @@ services:
     environment:
       DATABASE_USER:
       DATABASE_PASSWORD:
-
-  # db:
-  #   image: gcr.io/cloudsql-docker/gce-proxy:1.16
-  #   volumes:
-  #     - ./credentials.json:/config/credentials.json
-  #   ports:
-  #     - "3306:3306"
-  #   command:
-  #     [
-  #       "/cloud_sql_proxy",
-  #       "-instances=[YOUR_INSTANCE_CONNECTION_NAME]=tcp:0.0.0.0:3306",
-  #       "-credential_file=/config/credentials.json",
-  #     ]
   db:
-    image: mysql:8
+    image: postgres:13
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: sample_dev
-      MYSQL_USER: $DATABASE_USER
-      MYSQL_PASSWORD: $DATABASE_PASSWORD
+      POSTGRES_DB: polls
+      POSTGRES_USER: $DATABASE_USER
+      POSTGRES_PASSWORD: $DATABASE_PASSWORD
       TZ: "Asia/Tokyo"
-    command: mysqld --character-set-server=utf8mb4 --default-authentication-plugin=mysql_native_password
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - db_data:/var/lib/mysql:delegated
-
+      - db_data:/var/lib/postgresql/data
 volumes:
   db_data:

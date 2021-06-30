@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Copyright 2015 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,12 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import sys
+from django.db import models
 
-if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 
-    from django.core.management import execute_from_command_line
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
 
-    execute_from_command_line(sys.argv)
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+
+# Create your models here.

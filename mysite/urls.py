@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Copyright 2015 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,12 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import sys
+from django.conf import settings
+from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.urls import include, path
 
-if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 
-    from django.core.management import execute_from_command_line
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('polls.urls')),
+]
 
-    execute_from_command_line(sys.argv)
+# Only serve static files from Django during development
+# Use Google Cloud Storage or an alternative CDN for production
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()

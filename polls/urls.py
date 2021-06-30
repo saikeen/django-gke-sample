@@ -12,11 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from django.urls import path
 
-import os
+from . import views
 
-from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "testproject.settings")
-
-application = get_wsgi_application()
+urlpatterns = [
+    path('', views.index, name='index')
+]

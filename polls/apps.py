@@ -12,18 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from django.conf import settings
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.apps import AppConfig
 
-from django.contrib import admin
-from django.urls import include, path
 
-from apiapp.urls import router as apiapp_router
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include(apiapp_router.urls)),
-]
-
-if settings.DEBUG:
-    urlpatterns += staticfiles_urlpatterns()
+class PollsConfig(AppConfig):
+    name = 'polls'

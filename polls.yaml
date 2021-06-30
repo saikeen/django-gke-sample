@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License
 
-# This file configures the game-backend application . The frontend serves
+# This file configures the polls application . The frontend serves
 # public web traffic.
 
 # The bookshelf frontend replication controller ensures that at least 3
@@ -26,23 +26,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: game-backend
+  name: polls
   labels:
-    app: game-backend
+    app: polls
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: game-backend
+      app: polls
   template:
     metadata:
       labels:
-        app: game-backend
+        app: polls
     spec:
       containers:
-        - name: game-backend-app
+        - name: polls-app
           # Replace  with your project ID or use `make template`
-          image: gcr.io/crafty-mile-317110/game-backend
+          image: gcr.io/centered-cable-318110/polls
           # This setting makes nodes pull the docker image every time before
           # starting the pod. This is useful when debugging, but should be turned
           # off in production.
@@ -70,7 +70,7 @@ spec:
             [
               "/cloud_sql_proxy",
               "--dir=/cloudsql",
-              "-instances=[YOUR_INSTANCE_CONNECTION_NAME]=tcp:3306",
+              "-instances=centered-cable-318110:asia-northeast1:polls-instance=tcp:5432",
               "-credential_file=/secrets/cloudsql/credentials.json",
             ]
           volumeMounts:
@@ -97,7 +97,7 @@ spec:
 
 ---
 # [START service]
-# The game-backend service provides a load-balancing proxy over the game-backend app
+# The polls service provides a load-balancing proxy over the polls app
 # pods. By specifying the type as a 'LoadBalancer', Container Engine will
 # create an external HTTP load balancer.
 # For more information about Services see:
@@ -107,14 +107,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: game-backend
+  name: polls
   labels:
-    app: game-backend
+    app: polls
 spec:
   type: LoadBalancer
   ports:
     - port: 80
       targetPort: 8080
   selector:
-    app: game-backend
+    app: polls
 # [END service]

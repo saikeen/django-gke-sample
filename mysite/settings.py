@@ -40,8 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apiapp',
-    'rest_framework',
+    'polls'
 )
 
 MIDDLEWARE = (
@@ -54,7 +53,7 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'testproject.urls'
+ROOT_URLCONF = 'mysite.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'testproject.wsgi.application'
+WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -83,13 +82,12 @@ DATABASES = {
     'default': {
         # If you are using Cloud SQL for MySQL rather than PostgreSQL, set
         # 'ENGINE': 'django.db.backends.mysql' instead of the following.
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sample_dev',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'polls',
         'USER': os.getenv('DATABASE_USER'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        # 'HOST': '127.0.0.1',
         'HOST': 'db',
-        'PORT': '3306',
+        'PORT': '5432',
     }
 }
 # [END gke_django_database_config]
@@ -98,9 +96,9 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'ja'
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Tokyo'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
