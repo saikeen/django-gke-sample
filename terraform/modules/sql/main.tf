@@ -8,12 +8,13 @@ resource "random_id" "db_name_suffix" {
 
 resource "google_sql_database_instance" "master" {
   name                = "${local.env_resource_prefix}-db-${random_id.db_name_suffix.hex}"
-  database_version    = "MYSQL_8_0"
+  database_version    = "POSTGRES_13"
   region              = var.region
   deletion_protection = false
 
   settings {
-    tier = "db-f1-micro"
+    tier      = "db-f1-micro"
+    disk_size = 10
   }
 }
 

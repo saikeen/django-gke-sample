@@ -3,21 +3,13 @@ module "sa" {
 }
 
 module "iam" {
-  source                 = "../../modules/iam"
-  gke_node_pool_sa_email = module.sa.gke_node_pool_sa_email
-  sql_proxy_sa_email     = module.sa.sql_proxy_sa_email
+  source              = "../../modules/iam"
+  sql_client_sa_email = module.sa.sql_client_sa_email
 }
 
 module "secret" {
-  source                   = "../../modules/secret"
-  sql_proxy_sa_private_key = module.sa.sql_proxy_sa_private_key
-}
-
-module "vpc" {
-  source   = "../../modules/vpc"
-  region   = var.region
-  app_name = var.app_name
-  env      = var.env
+  source                    = "../../modules/secret"
+  sql_client_sa_private_key = module.sa.sql_client_sa_private_key
 }
 
 module "sql" {
@@ -35,8 +27,4 @@ module "gke" {
   location               = var.location
   app_name               = var.app_name
   env                    = var.env
-  gke_node_pool_sa_email = module.sa.gke_node_pool_sa_email
-  vpc_id                 = module.vpc.vpc_id
-  subnet_id              = module.vpc.subnet_id
-  subnet_range_name      = module.vpc.subnet_range_name
 }

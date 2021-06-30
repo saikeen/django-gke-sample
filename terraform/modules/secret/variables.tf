@@ -1,1 +1,1 @@
-variable "sql_proxy_sa_private_key" {}
+variable "sql_client_sa_private_key" {}

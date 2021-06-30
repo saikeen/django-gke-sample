@@ -8,13 +8,13 @@ variable "location" {
   default = "asia-northeast1-a"
 }
 variable "app_name" {
-  default = "game-backend"
+  default = "polls"
 }
 variable "env" {
   default = "prod"
 }
 variable "db_name" {
-  default = "game_backend_prod"
+  default = "polls"
 }
 variable "db_user_name" {
   default = "django"
