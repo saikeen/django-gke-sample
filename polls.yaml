@@ -42,7 +42,7 @@ spec:
       containers:
         - name: polls-app
           # Replace  with your project ID or use `make template`
-          image: gcr.io/centered-cable-318110/polls
+          image: gcr.io/crafty-mile-317110/polls
           # This setting makes nodes pull the docker image every time before
           # starting the pod. This is useful when debugging, but should be turned
           # off in production.
@@ -70,7 +70,7 @@ spec:
             [
               "/cloud_sql_proxy",
               "--dir=/cloudsql",
-              "-instances=centered-cable-318110:asia-northeast1:polls-instance=tcp:5432",
+              "-instances=crafty-mile-317110:asia-northeast1:polls-prod-db-d07700a6=tcp:5432",
               "-credential_file=/secrets/cloudsql/credentials.json",
             ]
           volumeMounts:
